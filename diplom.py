@@ -9,25 +9,24 @@ token  = input ('Token:vk1.a.oyOMS9Mia8-1d9wzx4iaiL5ScyydRM4ZITb4n9tylutAyVSwQPj
 vk = vk_api.VkApi(token=token)
 longpoll = VkLongPoll(vk)
 
-     with conn.cursor() as cur:
+with conn.cursor() as cur:
             cur.execute("CREATE TABLE user(id SERIAL PRIMARY KEY,"
                         "age INTEGER,"
                         "gender VARCHAR,"
                         "city VARCHAR,"
                         "family_status VARCHAR)");
 
-        with conn.cursor() as cur:
-            cur.execute(
-                "INSERT INTO user (age, gender, city, family_status)
-            VALUES('{age}', '{gender}', '{city}', '{family_status}')");
+with conn.cursor() as cur:
+            cur.execute("INSERT INTO user (age, gender, city, family_status)"
+            "VALUES('{age}', '{gender}', '{city}', '{family_status}')");
             conn.close()
 
 
-def user (user_id, message):
+ def user (user_id, message):
     vk.method('messages.send', {'user_id: id ', 'message': message, 'random_id': randrange (10 ** 7),})
 
 
-for event in longpoll.listen():
+ for event in longpoll.listen():
     if event.type == VkEventType.MESSAGE_NEW:
 
         if event.to_me:
@@ -40,7 +39,7 @@ for event in longpoll.listen():
             else:
                 write_msg(event.user_id, "Не поняла вашего ответа...");
 
- def get_photos_id(self, user_id):
+ d def get_photos_id(self, user_id):
                     url = 'https://api.vk.com/method/photos.getAll'
                     params = {'access_token': user_token,
                               'type': 'album',
